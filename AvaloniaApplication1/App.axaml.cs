@@ -4,9 +4,11 @@ using Avalonia.Markup.Xaml;
 
 using AvaloniaApplication1.ViewModels;
 using AvaloniaApplication1.Views;
+using PropertyChanged;
 
 namespace AvaloniaApplication1;
 
+[DoNotNotify]
 public partial class App : Application
 {
     public override void Initialize()
@@ -16,14 +18,14 @@ public partial class App : Application
 
     public override void OnFrameworkInitializationCompleted()
     {
-        if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+        if (this.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
             desktop.MainWindow = new MainWindow
             {
                 DataContext = new MainViewModel()
             };
         }
-        else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)
+        else if (this.ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)
         {
             singleViewPlatform.MainView = new MainView
             {
